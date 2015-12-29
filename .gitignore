@@ -217,3 +217,5 @@ pip-log.txt
 
 google_maps_api.xml
 AndroidManifest.xml
+Puyar4/keystorePassword.txt
+*.keystore

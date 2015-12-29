@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LinkConfirmationFragment.NoticeDialogListener{
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LinkConfirmationFragment.NoticeDialogListener, LegalNoticeFragment.NoticeDialogListener{
 
     private GoogleMap mMap;
 
@@ -74,7 +74,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // メニューの要素を追加
+
         MenuItem item = menu.add(0, 0, 0, "Help")
                 .setIcon(R.drawable.ic_action_about);
         MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
@@ -85,7 +85,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean ret = true;
-        Log.d("hoge", GoogleApiAvailability.getInstance().getOpenSourceSoftwareLicenseInfo(getApplicationContext()));
+
+        DialogFragment dialog = new LegalNoticeFragment();
+        dialog.show(getFragmentManager(), GoogleApiAvailability.getInstance().getOpenSourceSoftwareLicenseInfo(getApplicationContext()));
+
         return ret;
     }
 
@@ -153,5 +156,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         // User touched the dialog's negative button
+    }
+
+    @Override
+    public void onDialogCloseClick(DialogFragment dialog){
+
     }
 }
